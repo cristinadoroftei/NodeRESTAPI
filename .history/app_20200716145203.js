@@ -5,11 +5,11 @@ const bodyParser = require('body-parser');
 const mongoose = require('mongoose')
 const multer = require('multer');
 const crypto = require('crypto')
-const graphqlHttp = require('express-graphql').graphqlHTTP;
+const graphqlHttp = require('express-graphql')
 
-const graphqlSchema = require('./graphql/schema.js')
-const graphqlResolver = require('./graphql/resolvers.js')
 
+const feedRoutes = require("./routes/feed.js")
+const authRoutes = require("./routes/auth.js")
 
 const app = express();
 
@@ -45,10 +45,7 @@ app.use((req, res, next) => {
     next();
 })
 
-app.use('/graphql', graphqlHttp({
-    schema: graphqlSchema,
-    rootValue: graphqlResolver
-}));
+app.use('/graphql', graphqlHttp);
 
 app.use((error, req, res, next) =>  {
     console.log(error);
@@ -61,7 +58,11 @@ app.use((error, req, res, next) =>  {
 mongoose.connect('mongodb+srv://cristina:Poison123239@cluster0-ndbei.mongodb.net/messages?retryWrites=true&w=majority')
 .then(result => {
     console.log("Connected to the database!!!")
-    app.listen(8080);
+    const server = app.listen(8080);
+    const io = require('./socket').init(server);
 
+    io.on('connection', socket => {
+        console.log('Client connected!')
+    })
 }).catch(err => console.log(err))
 

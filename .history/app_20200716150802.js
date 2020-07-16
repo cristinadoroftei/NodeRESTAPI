@@ -5,7 +5,7 @@ const bodyParser = require('body-parser');
 const mongoose = require('mongoose')
 const multer = require('multer');
 const crypto = require('crypto')
-const graphqlHttp = require('express-graphql').graphqlHTTP;
+const graphqlHttp = require('express-graphql')
 
 const graphqlSchema = require('./graphql/schema.js')
 const graphqlResolver = require('./graphql/resolvers.js')
