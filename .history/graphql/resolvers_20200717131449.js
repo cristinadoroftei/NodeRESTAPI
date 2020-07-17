@@ -13,8 +13,7 @@ module.exports = {
         errors.push({message: 'Password too short!'})
     }
     if(errors.length > 0){
-        const error = new Error('Invalid input')
-        throw error;
+        const error = new Error
     }
     const existing = await User.findOne({email: userInput.email})
     if(existing) {

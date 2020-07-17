@@ -12,10 +12,7 @@ module.exports = {
     if(validator.isEmpty(userInput.password) || !validator.isLength(userInput.password, {min: 5})){
         errors.push({message: 'Password too short!'})
     }
-    if(errors.length > 0){
-        const error = new Error('Invalid input')
-        throw error;
-    }
+    if(errors.length > 0)
     const existing = await User.findOne({email: userInput.email})
     if(existing) {
         const error = new Error('User exists already!')

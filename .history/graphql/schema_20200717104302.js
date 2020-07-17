@@ -7,8 +7,7 @@ module.exports = buildSchema(`
         content: String!
         imageUrl: String!
         creator: User!
-        createdAt: String!
-        updatedAt: String!
+        createdAt:
     }
 
     type User {
@@ -17,7 +16,7 @@ module.exports = buildSchema(`
         email: String!
         password: String
         status: String!
-        posts: [Post!]!
+        posts: []
     }
 
     input UserInputData {
@@ -27,15 +26,10 @@ module.exports = buildSchema(`
     }
 
     type RootMutation {
-       createUser(userInput: UserInputData): User!
-    }
-
-    type RootQuery {
-        hello: String
+       createUser(userInput: UserInputData) 
     }
 
     schema {
-        query: RootQuery
-        mutation: RootMutation
+        mutation:
     }
 `)

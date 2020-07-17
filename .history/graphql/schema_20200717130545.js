@@ -31,7 +31,7 @@ module.exports = buildSchema(`
     }
 
     type RootQuery {
-        hello: String
+        
     }
 
     schema {
